@@ -16,27 +16,7 @@ public class MagicCubeCreator : MonoBehaviour
 
     private void Create()
     {
-        GetPrefab();
-        GetMaterials();
         CreateCube();
-    }
-
-    private void GetPrefab()
-    {
-        if(prefab == null)
-            prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/MagicCube/Prefabs/Block.prefab");
-    }
-
-    private void GetMaterials()
-    {
-        if(materials == null || materials.Length == 0)
-            materials = new Material[6];
-
-
-        for (int i = 0; i < 6; i++)
-        {
-            materials[i] = AssetDatabase.LoadAssetAtPath<Material>(string.Format("Assets/MagicCube/Materials/mc{0}.mat", i+1));
-        }
     }
 
     private void CreateCube()

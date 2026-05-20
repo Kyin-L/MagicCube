@@ -7,7 +7,7 @@ namespace OffAxisStudios
     {
         private float minIntensity;
         private float maxIntensity;
-        private new Light light;
+        private Light m_light;
 
         [Tooltip("Multiplier to set the minimum light intensity based on the maximum.")]
         public float intensityFactor = 0.5f;
@@ -27,9 +27,9 @@ namespace OffAxisStudios
 
         private void Awake()
         {
-            light = transform.GetComponent<Light>();
+            m_light = transform.GetComponent<Light>();
 
-            maxIntensity = light.intensity;
+            maxIntensity = m_light.intensity;
             minIntensity = maxIntensity * intensityFactor;
         }
 
@@ -37,7 +37,7 @@ namespace OffAxisStudios
         {
             smoothQueue = new Queue<float>(smoothing);
 
-            if (light == null)
+            if (m_light == null)
             {
                 return;
             }
@@ -45,7 +45,7 @@ namespace OffAxisStudios
 
         void Update()
         {
-            if (light == null)
+            if (m_light == null)
                 return;
 
             while (smoothQueue.Count >= smoothing)
@@ -57,7 +57,7 @@ namespace OffAxisStudios
             smoothQueue.Enqueue(newVal);
             lastSum += newVal;
 
-            light.intensity = lastSum / (float)smoothQueue.Count;
+            m_light.intensity = lastSum / (float)smoothQueue.Count;
         }
     }
 }
